@@ -14,7 +14,7 @@ Requirements for a basic hangman game
     - initalize chances to 6
 
 3. on user input:
-    - display chance remaining
+    - display hangman
 
     - check if letter already used
         - warn and request input again
