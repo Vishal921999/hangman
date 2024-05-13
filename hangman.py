@@ -2,15 +2,26 @@ import random
 from variation import fetchHangman
 
 def gamePlay(word,blanks,chances,currentHangman,wordDict):
-    guessedLetters = set()
+
+    guessedLetters = []
+    isGuessedCorrectly = False
+
     while chances >= 0:
+        # exit condition - win
         if ''.join(blanks) == word:
-            print("Game Complete")
+            isGuessedCorrectly = True
             break
         
         print(currentHangman)
+
+        # exit condition - lose
+        if(chances == 0):
+            break
+
         print(f"Guess the word: {' '.join(blanks)}")
-        letter = input("Guess a letter in word: ")
+        print(f"Letters used: {guessedLetters}")
+
+        letter = input("Guess a letter: ")
 
         if letter in guessedLetters:
             print("Letter already guessed. Please try again!")
@@ -22,9 +33,9 @@ def gamePlay(word,blanks,chances,currentHangman,wordDict):
             else:
                 chances -= 1
                 currentHangman = fetchHangman(chances)
-            guessedLetters.add(letter)
+            guessedLetters.append(letter)
             
-            
+    return isGuessedCorrectly
 
 
 def readFile(file):
@@ -48,10 +59,48 @@ def initGame(words):
     chances = 6
     currentHangman = fetchHangman(chances)
     wordDict = createDictionary(word)
-    gamePlay(word,blanks,chances,currentHangman,wordDict)
+    return word, gamePlay(word,blanks,chances,currentHangman,wordDict)
+
+def playAgain():
+
+    playAgain = True
+
+    while playAgain:
+        option = input("Play again? (Y/N): ")
+
+        if option.lower() == "n":
+            print("Thanks for playing!\n")
+            playAgain = False
+            break
+
+        elif option.lower() == "y":
+            print("*---- NEW GAME ----*\n")
+            break
+
+        else:
+            print("Invalid input")
+    
+    return playAgain
 
 if __name__ == '__main__':
     words = readFile('words.txt')
     score = 0
 
-    initGame(words)
+    while True:
+        word, result = initGame(words)
+
+        if result:
+            score += 10
+            print(f"\nYou guessed {word} correctly!")
+
+        else:
+            print(f"Oops! You hanged the man :(")
+            print(f"The word was: {word}")
+
+        print(f"Score: {score}")
+        print("\n==============================\n")
+
+        if not playAgain():
+            break 
+    
+    print(f"Final Score: {score}\n")
