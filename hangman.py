@@ -1,4 +1,5 @@
 import random
+from variation import fetchHangman
 
 def readFile(file):
     with open(file,'r') as f:
@@ -13,11 +14,10 @@ def gamePlay(words):
 
     chances = 6
 
-    # TODO: hangman variations 1.b.
-    # currentHangman = fetchHangman(chances)
-
-
+    currentHangman = fetchHangman(chances)
 
 if __name__ == '__main__':
     words = readFile('words.txt')
     score = 0
+
+    gamePlay(words)
