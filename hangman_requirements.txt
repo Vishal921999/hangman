@@ -2,7 +2,9 @@ Requirements for a basic hangman game
 
 1.a. create a list of words (probably a static read only file)
 
-1.b. on session start:
+1.b. create hangman variations
+
+1.c. on session start:
     - initialize score to 0
 
 2.a. on game start:
