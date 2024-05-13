@@ -1,0 +1,37 @@
+Requirements for a basic hangman game
+
+1.a. create a list of words (probably a static read only file)
+
+1.b. on session start:
+    - initialize score to 0
+
+2.a. on game start:
+    - select a random word from file
+    - generate blanks for selected word
+    - generate inital hangman
+    - initalize chances to 6
+
+3. on user input:
+    - display chance remaining
+
+    - check if letter already used
+        - warn and request input again
+
+    - check if letter in word
+        - YES - fill all corresponding blanks with letter
+        - NO - update hangman and decrement chance
+    
+    - add letter to used letters
+    
+4. on hangman completion:
+    - reveal correct word
+    - end current game
+    - ask to play again
+
+5. on complete word guessed
+    - increment score by 10
+    - ask to play again
+
+6. on session end: 
+    - reveal final score
+    
